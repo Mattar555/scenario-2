@@ -1,0 +1,38 @@
+kind: Job
+apiVersion: batch/v1
+metadata:
+  name: db-init-loader
+  namespace: integration-enablement
+  labels:
+    purpose: db-init
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: db-init
+          image: 'quay.io/marwan_attar_ibm/integration-enablement-db-init:v7'
+          env:
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: enablement-persistence-app
+                  key: user
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: enablement-persistence-app
+                  key: password
+            - name: DB_DB
+              valueFrom:
+                secretKeyRef:
+                  name: enablement-persistence-app
+                  key: dbname
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: enablement-persistence-app
+                  key: host
+  backoffLimit: 3
+
+

@@ -1,0 +1,10 @@
+{
+  "subscriptions": {
+    "navigator": {
+      "channel": "v7.3-sc2",
+      "name": "ibm-integration-platform-navigator",
+      "native": "true",
+      "catalogsource": ""
+    }
+  }
+}

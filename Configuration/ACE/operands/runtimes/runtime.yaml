@@ -1,0 +1,34 @@
+apiVersion: appconnect.ibm.com/v1beta1
+kind: IntegrationRuntime
+metadata:
+  annotations:
+    appconnect.ibm.com/updating: 'false'
+  name: bank-app
+  namespace: integration-enablement
+  labels:
+    appconnect.ibm.com/designerapiflow: 'false'
+    appconnect.ibm.com/designereventflow: 'false'
+    appconnect.ibm.com/toolkitflow: 'true'
+    backup.appconnect.ibm.com/component: integrationruntime
+spec:
+  barURL:
+    - 'https://sydney-cos.s3.au-syd.cloud-object-storage.appdomain.cloud/marwan.bar'
+  configurations:
+    - odbcini
+    - acedbauth
+    - barauth-pull-config
+  license:
+    accept: true
+    license: L-XRNH-47FJAW
+    use: CloudPakForIntegrationNonProductionFREE
+  logFormat: basic
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: runtime
+          resources:
+            requests:
+              cpu: 300m
+              memory: 368Mi
+  version: '12.0'

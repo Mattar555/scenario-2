@@ -1,0 +1,13 @@
+curl -XPOST --header "Content-Type: application/json" --data '{"input": "xyz"}' http://localhost:7800/transfer
+curl -XPOST --header "Content-Type: application/json" --data '{"customer_id": 111, "first_name": "aceuser", "last_name": "is", "full_name": "aceuseris", "balance": 140000}' http://localhost:7800/DatabaseCompute
+
+
+curl -XPOST --header "Content-Type: application/json" --data '{"transfer_id": 1, "from_id": 456, "to_id": 123, "transfer_amount": 100}' http://localhost:7800/performTransfer
+
+
+curl -XPOST --header "Content-Type: application/json" --data '{"transfer_id": 5000, "from_id": 456, "to_id": 123, "transfer_amount": 100, "transfer_date": "1999-01-08 04:05:06"}' http://bank-app-http-integration-enablement.apps.itzocp-666000qmn3-8fd7.selfservice.aws.techzone.ibm.com/performTransfer
+
+curl -XGET http://localhost:7800/getDetails
+
+
+curl -XGET http://bank-app-http-integration-enablement.apps.itzocp-666000qmn3-8fd7.selfservice.aws.techzone.ibm.com/getDetails

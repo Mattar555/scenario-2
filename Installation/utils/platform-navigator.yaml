@@ -1,0 +1,13 @@
+kind: PlatformNavigator
+apiVersion: integration.ibm.com/v1beta1
+metadata:
+  name: enablement
+  labels:
+    backup.integration.ibm.com/component: platformnavigator
+  namespace: integration-enablement
+spec:
+  license:
+    accept: true
+    license: L-JTPV-KYG8TF
+  replicas: 1
+  version: 16.1.0

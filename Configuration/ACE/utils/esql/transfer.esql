@@ -1,0 +1,25 @@
+CREATE COMPUTE MODULE DatabaseCompute_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN		
+		SET OutputRoot = InputRoot;
+		DECLARE Input REFERENCE TO InputRoot.JSON.Data;
+		DECLARE DBSchema CHARACTER 'public';				
+		DECLARE DBTRTable CHARACTER 'transfers';
+		DECLARE DBCUTable CHARACTER 'customers';
+		INSERT INTO Database.{DBSchema}.{DBTRTable} (transfer_id, from_id, to_id, transfer_amount, transfer_date)
+		            Values( Input.transfer_id, Input.from_id, Input.to_id, Input.transfer_amount, Input.transfer_date);
+		UPDATE Database.{DBSchema}.{DBCUTable} as CU
+		  SET balance = CU.balance + Input.transfer_amount
+		  WHERE CU.customer_id = Input.to_id;
+		UPDATE Database.{DBSchema}.{DBCUTable} as CU
+		  SET BALANCE = CU.BALANCE - Input.transfer_amount 
+		  WHERE CU.customer_id = Input.from_id;
+		IF (SQLCODE = 0) THEN
+            SET OutputRoot.JSON.Data.Status = 'SUCCESS';
+        ELSE
+            SET OutputRoot.JSON.Data.Result =  'FAIL';
+        END IF;							
+		RETURN TRUE;
+	END;
+END MODULE;
+

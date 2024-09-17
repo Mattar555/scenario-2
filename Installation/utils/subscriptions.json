@@ -1,0 +1,52 @@
+{
+  "subscriptions": {
+    "apiconnect": {
+      "channel": "v5.2-sc2",
+      "name": "ibm-apiconnect",
+      "native": "true",
+      "catalogsource": ""
+    },
+    "appconnect": {
+      "channel": "v12.0-sc2",
+      "name": "ibm-appconnect",
+      "native": "true",
+      "catalogsource": ""
+    },
+    "mq": {
+      "channel": "v3.2-sc2",
+      "name": "ibm-mq",
+      "native": "true",
+      "catalogsource": ""
+    },
+    "eventstreams": {
+      "channel": "v3.4",
+      "name": "ibm-eventstreams",
+      "native": "true",
+      "catalogsource": ""
+    },
+    "eventendpointmanagement": {
+      "channel": "v11.2",
+      "name": "ibm-eventendpointmanagement",
+      "native": "true",
+      "catalogsource": ""
+    },
+    "flink": {
+      "channel": "v1.2",
+      "name": "ibm-eventautomation-flink",
+      "native": "true",
+      "catalogsource": ""
+    },
+    "processing": {
+      "channel": "v1.2",
+      "name": "ibm-eventprocessing",
+      "native": "true",
+      "catalogsource": ""
+    },
+    "foundation": {
+      "channel": "v4.6",
+      "name": "ibm-common-service-operator",
+      "native": "false",
+      "catalogsource": "opencloud-operators"
+    }
+  }
+}

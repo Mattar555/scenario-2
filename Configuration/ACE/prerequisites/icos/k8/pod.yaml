@@ -1,0 +1,42 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: icos-client
+  namespace: integration-enablement
+  labels:
+    purpose: bar-repository
+spec:
+  schedulerName: default-scheduler
+  terminationGracePeriodSeconds: 30
+  containers:
+    - resources: {}
+      terminationMessagePath: /dev/termination-log
+      name: icos
+      securityContext:
+        capabilities:
+          drop:
+            - MKNOD
+      imagePullPolicy: IfNotPresent
+      image: 'quay.io/marwan_attar_ibm/enablement-icos:v3'
+      env:
+      - name: COS_BUCKET
+        valueFrom:
+          secretKeyRef:
+            name: icos-data 
+            key: COS_BUCKET
+      - name: COS_ENDPOINT
+        valueFrom:
+          secretKeyRef:
+            name: icos-data
+            key: COS_ENDPOINT
+      - name: COS_API_KEY_ID
+        valueFrom:
+          secretKeyRef:
+            name: icos-data
+            key: COS_API_KEY_ID
+      - name: COS_INSTANCE_CRN
+        valueFrom:
+          secretKeyRef:
+            name: icos-data
+            key: COS_INSTANCE_CRN
+  dnsPolicy: ClusterFirst

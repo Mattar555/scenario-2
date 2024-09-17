@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<Data>
+  <Customers>
+    <customer_id>1</customer_id>
+    <first_name>Malicious</first_name>
+    <last_name>User</last_name>
+    <full_name>Malicious User</full_name>
+  </Customers>
+  <Customers>
+    <customer_id>789</customer_id>
+    <first_name>Peter</first_name>
+    <last_name>Jessup</last_name>
+    <full_name>Peter Jessup</full_name>
+  </Customers>
+  <Customers>
+    <customer_id>234</customer_id>
+    <first_name>Leonardo</first_name>
+    <last_name>Vidal</last_name>
+    <full_name>Leonardo Vidal</full_name>
+  </Customers>
+  <Customers>
+    <customer_id>567</customer_id>
+    <first_name>Sasha</first_name>
+    <last_name>Khalikov</last_name>
+    <full_name>Sasha Khalikov</full_name>
+  </Customers>
+  <Customers>
+    <customer_id>890</customer_id>
+    <first_name>Bernd</first_name>
+    <last_name>Beilke</last_name>
+    <full_name>Bernd Beilke</full_name>
+  </Customers>
+  <Customers>
+    <customer_id>100</customer_id>
+    <first_name>Mohak</first_name>
+    <last_name>Talreja</last_name>
+    <full_name>Mohak Talreja</full_name>
+  </Customers>
+  <Customers>
+    <customer_id>123</customer_id>
+    <first_name>Marwan</first_name>
+    <last_name>Attar</last_name>
+    <full_name>Marwan Attar</full_name>
+  </Customers>
+  <Customers>
+    <customer_id>456</customer_id>
+    <first_name>Oliver</first_name>
+    <last_name>Medland</last_name>
+    <full_name>Oliver Medland</full_name>
+  </Customers>
+  <Status>SUCCESS</Status>
+</Data>
+

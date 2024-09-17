@@ -1,0 +1,19 @@
+CREATE COMPUTE MODULE GetCustomerDetails_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot = InputRoot;
+		DECLARE Input REFERENCE TO InputRoot.JSON.Data;
+		DECLARE DBSchema CHARACTER 'public';				
+		DECLARE DBTable CHARACTER 'customers';
+		DELETE FIELD OutputRoot.*[<];
+		SET OutputRoot.XML.Data.Customers[] =
+  			(SELECT T.customer_id, T.first_name, T.last_name, T.full_name FROM Database.{DBSchema}.{DBTable} AS T);
+		IF (SQLCODE = 0) THEN
+            SET OutputRoot.XML.Data.Status = 'SUCCESS';
+        ELSE
+            SET OutputRoot.XML.Data.Result =  'FAIL';
+        END IF;							
+		RETURN TRUE;
+	END;
+END MODULE;
+

@@ -1,0 +1,49 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: enablement-persistence
+  namespace: integration-enablement
+spec:
+  logLevel: info
+  startDelay: 3600
+  stopDelay: 1800
+  nodeMaintenanceWindow:
+    inProgress: false
+    reusePVC: true
+  smartShutdownTimeout: 180
+  backup:
+    target: prefer-standby
+    volumeSnapshot:
+      online: true
+      onlineConfiguration:
+        immediateCheckpoint: false
+        waitForArchive: true
+      snapshotOwnerReference: none
+  enableSuperuserAccess: false
+  monitoring:
+    disableDefaultQueries: false
+    enablePodMonitor: false
+  minSyncReplicas: 0
+  postgresGID: 26
+  replicationSlots:
+    highAvailability:
+      enabled: true
+      slotPrefix: _cnpg_
+    synchronizeReplicas:
+      enabled: true
+    updateInterval: 30
+  enablePDB: true
+  primaryUpdateMethod: restart
+  failoverDelay: 0
+  postgresUID: 26
+  walStorage:
+    resizeInUseVolumes: true
+    size: 1Gi
+  maxSyncReplicas: 0
+  switchoverDelay: 3600
+  storage:
+    resizeInUseVolumes: true
+    size: 1Gi
+  primaryUpdateStrategy: unsupervised
+  instances: 1
+

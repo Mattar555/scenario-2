@@ -1,0 +1,19 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: enablement-persistence-route
+  namespace: integration-enablement
+  labels:
+    cnpg.io/cluster: enablement-persistence
+spec:
+  to:
+    kind: Service
+    name: enablement-persistence-rw
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: ''
+    destinationCACertificate: ''
+  port:
+    targetPort: postgres
+  alternateBackends: []
+

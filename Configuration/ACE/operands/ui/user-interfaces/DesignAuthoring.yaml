@@ -1,0 +1,32 @@
+apiVersion: appconnect.ibm.com/v1beta1
+kind: DesignerAuthoring
+metadata:
+  name: enablement-authoring
+  labels:
+    backup.appconnect.ibm.com/component: designerauthoring
+  namespace: integration-enablement
+spec:
+  license:
+    accept: true
+    license: L-XRNH-47FJAW
+    use: CloudPakForIntegrationNonProduction
+  couchdb:
+    storage:
+      size: 10Gi
+      type: persistent-claim
+      class: ocs-storagecluster-ceph-rbd
+    replicas: 1
+  designerMappingAssist:
+    incrementalLearning:
+      schedule: Every 15 days
+    enabled: true
+  authentication:
+    integrationKeycloak:
+      enabled: true
+  authorization:
+    integrationKeycloak:
+      enabled: true
+  designerFlowsOperationMode: local
+  replicas: 1
+  version: '12.0'
+
