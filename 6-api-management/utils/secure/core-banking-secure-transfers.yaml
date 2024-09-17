@@ -1,0 +1,143 @@
+openapi: 3.0.3
+info:
+  title: Core Banking Secure Transfer endpoint
+  version: 1.0.0
+  description: Core Banking Secure Transfer Endpoint
+  contact:
+    name: Marwan Attar
+    url: https://ibm.com
+    email: marwan.attar@ibm.com
+  x-ibm-name: core-banking-secure-transfer-endpoint
+servers:
+  - url: /
+    description: Base endpoint
+externalDocs:
+  description: Description of core banking transfer endpoint
+  url: https://ibm.com
+paths:
+  /performSecureTransfer:
+    post:
+      operationId: secure-transfers
+      summary: Perform a secure transfer from user X to user Y
+      description: Perform a secure transfer from user X to user Y
+      tags:
+        - secure-transfers
+      requestBody:
+        description: Transfer Request Body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transferrequest'
+      responses:
+        '200':
+          description: Successful transfer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transferresponse'
+components:
+  schemas:
+    transferrequest:
+      type: object
+      properties:
+        transfer_id:
+          type: number
+          description: Transfer ID
+          example: 12345
+        from_id:
+          type: number
+          description: Customer ID initiating the transfer
+          example: 123
+        to_id:
+          type: number
+          description: Customer ID at the receieving end of the transfer.
+          example: 456
+        transfer_amount:
+          type: number
+          description: Amount transferred.
+          example: 88
+        transfer_date:
+          type: string
+          description: Date when the transfer was complete.
+          example: '2000-01-08 03:05:06'
+    transferresponse:
+      type: object
+      properties:
+        transfer_id:
+          type: number
+          description: Transfer ID
+          example: 12345
+        from_id:
+          type: number
+          description: Customer ID initiating the transfer
+          example: 123
+        to_id:
+          type: number
+          description: Customer ID at the receieving end of the transfer.
+          example: 456
+        transfer_amount:
+          type: number
+          description: Amount transferred.
+          example: 89
+        transfer_date:
+          type: string
+          description: Date when the transfer was complete.
+          example: '2000-01-08 03:05:06'
+        STATUS:
+          type: string
+          description: Status of transfer.
+          example: success
+  securitySchemes:
+    client_id:
+      type: apiKey
+      x-key-type: client_id
+      name: X-IBM-Client-Id
+      in: header
+    client_secret:
+      type: apiKey
+      in: header
+      name: X-IBM-Client-Secret
+      x-key-type: client_secret
+tags:
+  - name: secure-transfers
+    description: Transfers powering Core banking application.
+x-ibm-configuration:
+  type: rest
+  phase: realized
+  enforced: true
+  testable: true
+  gateway: datapower-api-gateway
+  cors:
+    enabled: true
+  assembly:
+    execute:
+      - invoke:
+          version: 2.0.0
+          title: invoke
+          backend-type: detect
+          header-control:
+            type: blocklist
+            values: []
+          parameter-control:
+            type: allowlist
+            values: []
+          timeout: 60
+          verb: keep
+          chunked-uploads: true
+          persistent-connection: true
+          target-url: $(target-url)
+          follow-redirects: false
+          inject-proxy-headers: true
+  properties:
+    target-url:
+      value: http://bank-app-http-integration-enablement.apps.itzocp-666000qmn3-8fd7.selfservice.aws.techzone.ibm.com/performTransfer
+      description: The URL of the secure transfer endpoint service
+      encoded: false
+  activity-log:
+    enabled: true
+    success-content: activity
+    error-content: payload
+security:
+  - client_id: []
+    client_secret: []

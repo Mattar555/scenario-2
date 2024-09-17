@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bank-app-fe
+  namespace: integration-enablement
+  labels:
+    purpose: fe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      purpose: fe
+  template:
+    metadata:
+      labels:
+        purpose: fe
+    spec:
+      containers:
+      - name: bank-app-fe
+        env:
+          - name: URL
+            valueFrom:
+              secretKeyRef:
+                name: banking-app-fe-basic
+                key: url
+          - name: PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: banking-app-fe-basic 
+                key: password
+        image: quay.io/marwan_attar_ibm/bank-app-fe:v7
+        ports:
+        - containerPort: 8501

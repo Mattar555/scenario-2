@@ -1,0 +1,95 @@
+openapi: 3.0.3
+info:
+  title: Core Banking customer detail endpoint
+  version: 1.0.0
+  description: Core Banking customer detail
+  contact:
+    name: Marwan Attar
+    url: https://ibm.com
+    email: marwan.attar@ibm.com
+  x-ibm-name: core-banking-customer-detail-endpoint
+servers:
+  - url: /
+    description: Base endpoint
+externalDocs:
+  description: Description of core banking customer endpoint
+  url: https://ibm.com
+paths:
+  /getDetails:
+    get:
+      operationId: details
+      summary: Get customer details prior to performing a transfer
+      description: Get customer details prior to performing a transaction
+      tags:
+        - details
+      responses:
+        '200':
+          description: Successful get detail request
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/detailresponsearray'
+components:
+  schemas:
+    detailresponsearray:
+      type: array
+      items:
+        $ref: '#/components/schemas/detailresponse'
+    detailresponse:
+      type: object
+      properties:
+        customer_id:
+          type: number
+          description: Customer ID
+          example: 123
+        first_name:
+          type: string
+          description: Customer First Name
+          example: "Marwan"
+        last_name:
+          type: string
+          description: Customer Last Name
+          example: "Attar"
+        full_name:
+          type: string
+          description: Customer Full Name
+          example: "Marwan Attar"
+tags:
+  - name: details
+    description: Get detail of customer to send to prior to performing a transfer transaction.
+x-ibm-configuration:
+  type: rest
+  phase: realized
+  enforced: true
+  testable: true
+  gateway: datapower-api-gateway
+  cors:
+    enabled: true
+  assembly:
+    execute:
+      - invoke:
+          version: 2.0.0
+          title: invoke
+          backend-type: detect
+          header-control:
+            type: blocklist
+            values: []
+          parameter-control:
+            type: allowlist
+            values: []
+          timeout: 60
+          verb: keep
+          chunked-uploads: true
+          persistent-connection: true
+          target-url: $(target-url)
+          follow-redirects: false
+          inject-proxy-headers: true
+  properties:
+    target-url:
+      value: http://bank-app-http-integration-enablement.apps.itzocp-666000qmn3-8fd7.selfservice.aws.techzone.ibm.com/getDetails
+      description: The URL of the target service
+      encoded: false
+  activity-log:
+    enabled: true
+    success-content: activity
+    error-content: payload
