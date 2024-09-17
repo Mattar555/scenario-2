@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bank-app-fe-service
+  namespace: integration-enablement
+spec:
+  selector:
+    purpose: fe
+  ports:
+  - name: bank-app-fe-service
+    protocol: TCP
+    port: 8501
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: bank-app-fe-route
+  namespace: integration-enablement
+  labels: {}
+spec:
+  to:
+    kind: Service
+    name:  bank-app-fe-service
+  tls: null
+  port:
+    targetPort: 8501
+  alternateBackends: []
