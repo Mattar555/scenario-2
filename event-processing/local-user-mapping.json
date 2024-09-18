@@ -1,0 +1,17 @@
+{
+  "mappings": [
+    {
+      "id": "enablement",
+      "roles": [
+        "user"
+      ]
+    },
+    {
+      "id": "enable",
+      "roles": [
+        "user"
+      ]
+    }
+  ]
+}
+
